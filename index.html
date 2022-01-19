@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div name="container">
+      <h2>Vos donnees</h2>
+      <span>A</span>
+      <input id="A" type="text" disabled />
+      <span>B</span>
+      <input type="text" id="B" disabled required />
+      <h2>Votre solution</h2>
+      <form name="f1" class="form" onsubmit="return verifier()">
+        <div>
+          <label for="one">A+B </label>
+          <input type="number" name="one" id="one" required />
+        </div>
+        <div>
+          <label for="two">A-B </label>
+          <input type="text" name="two" id="two" required />
+        </div>
+        <div>
+          <label for="three">A*B </label>
+          <input type="text" name="three" id="three" required />
+        </div>
+
+        <div>
+          <label for="four">A/B </label>
+          <input type="text" name="four" id="four" />
+        </div>
+        <input type="submit" value="Verifier" />
+      </form>
+      <h2>Vos donnees</h2>
+      <form>
+        <label for="rep1">A+B </label>
+        <input type="text" id="rep1" disabled />
+        <label for="rep2">A-B </label>
+        <input type="text" id="rep2" disabled />
+        <label for="rep3">A*B </label>
+        <input type="text" id="rep3" disabled />
+        <label for="rep4">A/B </label>
+        <input type="text" id="rep4" disabled />
+        <button onclick="return ok()">ok</button>
+      </form>
+    </div>
+  </body>
+  <style>
+    div {
+      background-color: aqua;
+    }
+    form {
+      margin: 20px 55px;
+    }
+    input {
+      background-color: white;
+      width: 50px;
+      margin-left: 10px;
+    }
+    .form {
+      border: 2px solid black;
+      height: 200px;
+      width: 150px;
+      margin-right: 100px;
+    }
+    .form div {
+      display: flex;
+      margin: 10px 20px;
+    }
+    .form label {
+      color: red;
+      background-color: white;
+    }
+  </style>
+</html>
+<script>
+  let body = document.body;
+  function tableCreate(row) {
+    let tbl = document.createElement("table");
+
+    tbl.style.border = "2px solid grey";
+
+    for (let i = 0; i < row + 1; i++) {
+      let tr = tbl.insertRow();
+      for (let j = 0; j < 10; j++) {
+        let td = tr.insertCell();
+        td.style.border = "1px solid black";
+        td.style.width = "15px";
+        td.style.textAlign = "center";
+        if (i > 0 && j > 0) {
+          td.appendChild(document.createTextNode(i * j));
+          td.style.color = "red";
+        } else {
+          if (i == 0 && j == 0) td.appendChild(document.createTextNode("*"));
+          else if (i == 0) td.appendChild(document.createTextNode(j));
+          else if (j == 0) td.appendChild(document.createTextNode(i));
+          td.style.backgroundColor = "green";
+        }
+      }
+    }
+    body.appendChild(tbl);
+  }
+
+  tableCreate(20);
+  reponses = body.container;
+  B = Math.floor(100 * Math.random());
+  A = Math.floor(100 * Math.random());
+  one = document.getElementById("one");
+  two = document.getElementById("two");
+  three = document.getElementById("three");
+  four = document.getElementById("four");
+  document.getElementById("A").value = A;
+  document.getElementById("B").value = B;
+
+  function verifier() {
+    if (
+      (one.value == A + B) &
+      (two.value == A - B) &
+      (three.value == A * B) &
+      (four.value == A / B)
+    )
+      alert("Very good! Your answers are all correct!");
+    else {
+      alert(
+        "Pay attention! There was an error in your answer. Recalculate again"
+      );
+      return false;
+    }
+  }
+  function ok() {
+    document.getElementById("rep1").value = A + B;
+    document.getElementById("rep2").value = A - B;
+    document.getElementById("rep3").value = A * B;
+    document.getElementById("rep4").value = A / B;
+    return false;
+  }
+</script>
